@@ -36,13 +36,11 @@ export default function Login({navigation}) {
                 password,
             });
             await AsyncStorage.setItem('Token', response.data.token);
-            console.log(response.data.user.id);
             await AsyncStorage.setItem(
                 'UserId',
                 response.data.user.id.toString(),
             );
             navigation.navigate('Balance');
-            console.log(response);
         } catch (_err) {
             console.log(_err);
         }

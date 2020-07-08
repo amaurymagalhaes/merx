@@ -30,7 +30,10 @@ module.exports = {
             },
         ],
         'import/prefer-default-export': 'off',
-        'react/prop-types': ['error', {ignore: ['navigation']}],
+        'react/prop-types': [
+            'error',
+            {ignore: ['navigation', 'data', 'route']},
+        ],
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
     },

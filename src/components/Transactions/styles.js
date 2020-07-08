@@ -1,51 +1,5 @@
 import styled from 'styled-components/native';
 
-export const Background = styled.View`
-    flex: 1;
-    background-color: #1e1e1e;
-`;
-
-export const MenuButton = styled.TouchableOpacity`
-    background-color: orange;
-    height: 50px;
-    width: 50px;
-`;
-
-export const BalanceContainer = styled.View`
-    height: 23%;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-`;
-
-export const BalanceText = styled.Text`
-    font-size: 25px;
-    color: #fbe5e7;
-`;
-export const BalanceMoneyText = styled.Text`
-    font-size: 40px;
-    color: #ffcc00;
-`;
-
-export const TransactionsContainer = styled.View`
-    height: 69%;
-    width: 100%;
-`;
-
-export const TransactionShelf = styled.View`
-    flex: 1;
-`;
-
-export const DateText = styled.Text`
-    color: #d9a441;
-    font-size: 30px;
-`;
-
-export const List = styled.FlatList`
-    flex: 1;
-    margin-bottom: 5%;
-`;
-
 export const TransactionBox = styled.View`
     background-color: #0d0d0d;
     padding-left: 5%;
@@ -81,7 +35,7 @@ export const TransactionTextName = styled.Text`
 
 export const TransactionTextTime = styled.Text`
     color: #f4dee0;
-    font-size: 15px;
+    font-size: 16px;
 `;
 
 export const MoneyText = styled.Text`

@@ -1,28 +1,24 @@
 import React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import {Text} from 'react-native';
 import {
     Background,
+    MenuButton,
     List,
     TransactionsContainer,
     BalanceContainer,
     BalanceMoneyText,
     BalanceText,
     DateText,
-    TransactionBox,
     TransactionShelf,
-    TransactionDirectionIcon,
-    TransactionTextName,
-    TransactionTextTime,
-    TransactionTextContainer,
-    MoneyText,
 } from './styles';
 import {Header} from '../globalStyles';
 
 import api from '../../services/api';
+import Transactions from '../../components/Transactions';
 
-export default function Balance() {
+export default function Balance({navigation}) {
     const [transactions, setTransactions] = useState([]);
+    const [balance, setBalance] = useState([]);
 
     async function checkTransactions() {
         try {
@@ -33,51 +29,59 @@ export default function Balance() {
                 },
             };
             const response = await api.get('/transactions', config);
-            setTransactions(response.data);
-            console.log(transactions);
+            const filteredResponse = response.data.sort(function sortData(
+                a,
+                b,
+            ) {
+                const c = new Date(a.createdAt);
+                const d = new Date(b.createdAt);
+                return d - c;
+            });
+            setTransactions(filteredResponse);
+            console.log('A');
         } catch (err) {
             console.log(err);
         }
     }
+
+    async function getBalance() {
+        try {
+            const token = await AsyncStorage.getItem('Token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const userid = (await AsyncStorage.getItem('UserId')).toString();
+            const balanceGot = await api.get(`/balance/${userid}`, config);
+            setBalance(balanceGot.data.amount);
+        } catch (err) {
+            console.log(err);
+        }
+        // setBalance(partialBalance);
+    }
+
     useEffect(() => {
+        getBalance();
         checkTransactions();
     }, []);
 
     return (
         <Background>
-            <Header />
+            <Header>
+                <MenuButton onPress={() => navigation.navigate('Menu')} />
+            </Header>
             <BalanceContainer>
                 <BalanceText>Saldo</BalanceText>
-                <BalanceMoneyText>R$</BalanceMoneyText>
+                <BalanceMoneyText>R$ {balance}</BalanceMoneyText>
             </BalanceContainer>
             <TransactionsContainer>
                 <TransactionShelf>
                     <DateText>Extrato</DateText>
-                    <TransactionBox>
-                        <TransactionDirectionIcon />
-                        <TransactionTextContainer>
-                            <TransactionTextName>Nome</TransactionTextName>
-                            <TransactionTextTime>Faz tempo</TransactionTextTime>
-                        </TransactionTextContainer>
-                        <MoneyText>-R$ 10,99</MoneyText>
-                    </TransactionBox>
                     <List
                         data={transactions}
                         keyExtractor={(item) => item.id.toString()}
-                        renderItem={({item}) => (
-                            <TransactionBox>
-                                <TransactionDirectionIcon />
-                                <TransactionTextContainer>
-                                    <TransactionTextName>
-                                        Nome
-                                    </TransactionTextName>
-                                    <TransactionTextTime>
-                                        Faz tempo
-                                    </TransactionTextTime>
-                                </TransactionTextContainer>
-                                <MoneyText>-R$ 10,99</MoneyText>
-                            </TransactionBox>
-                        )}
+                        renderItem={({item}) => <Transactions data={item} />}
                     />
                 </TransactionShelf>
             </TransactionsContainer>
