@@ -8,6 +8,10 @@ import {
     Input,
     Subtitle,
     EnterButton,
+    TextButton,
+    RegisterButton,
+    RegisterText,
+    RegisterText2,
 } from './styles';
 
 import api from '../../services/api';
@@ -40,6 +44,32 @@ export default function Login({navigation}) {
                 'UserId',
                 response.data.user.id.toString(),
             );
+            await AsyncStorage.setItem(
+                'Username',
+                response.data.user.username.toString(),
+            );
+            await AsyncStorage.setItem(
+                'NameUser',
+                response.data.user.name.toString(),
+            );
+            await AsyncStorage.setItem(
+                'UserEmail',
+                response.data.user.email.toString(),
+            );
+            await AsyncStorage.setItem(
+                'UserPhone',
+                response.data.user.phone.toString(),
+            );
+            await AsyncStorage.setItem(
+                'UserCPF',
+                response.data.user.cpf.toString(),
+            );
+            await AsyncStorage.setItem(
+                'UserBirthdate',
+                response.data.user.birthdate.toString(),
+            );
+
+            console.log(response.data.user);
             navigation.navigate('Balance');
         } catch (_err) {
             console.log(_err);
@@ -68,16 +98,13 @@ export default function Login({navigation}) {
                     onChangeText={(text) => handlePassword(text)}
                 />
             </Form>
-            <EnterButton
-                title="Entrar"
-                color="#C59E00"
-                onPress={() => signIn()}
-            />
-            <EnterButton
-                title="Registrar"
-                color="black"
-                onPress={() => navigation.navigate('Register')}
-            />
+            <EnterButton color="#C59E00" onPress={() => signIn()}>
+                <TextButton>Entrar</TextButton>
+            </EnterButton>
+            <RegisterButton onPress={() => navigation.navigate('Register')}>
+                <RegisterText>Ainda não possuo conta</RegisterText>
+                <RegisterText2>Criar nova conta</RegisterText2>
+            </RegisterButton>
         </Background>
     );
 }

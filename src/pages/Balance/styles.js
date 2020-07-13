@@ -6,9 +6,8 @@ export const Background = styled.View`
 `;
 
 export const MenuButton = styled.TouchableOpacity`
-    background-color: orange;
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
 `;
 
 export const BalanceContainer = styled.View`

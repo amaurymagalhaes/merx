@@ -89,7 +89,7 @@ export default function Friends({navigation}) {
         <Background>
             <Header>
                 <BackButton onPress={() => navigation.goBack()}>
-                    <BackButtonImg source={BackArrow} />
+                    <BackButtonImg resizeMode="contain" source={BackArrow} />
                 </BackButton>
             </Header>
             <FindBar>

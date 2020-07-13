@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import {set} from 'date-fns';
 import {
     BusinessIcon,
     FeedbackText,
@@ -9,12 +10,23 @@ import {
     ButtonText,
 } from './styles';
 
-import {Background, Header, Form, Input} from '../globalStyles';
+import {
+    Background,
+    Header,
+    Form,
+    Input,
+    BackButton,
+    BackButtonImg,
+} from '../globalStyles';
+import BackArrow from '../../images/backarrow.png';
 import api from '../../services/api';
 
 import ShoppingCart from '../../images/shoppingcart.png';
 
-export default function CreateBusiness() {
+export default function CreateBusiness({navigation}) {
+    const [businessName, setBusinessName] = useState('');
+    const [businessCNPJ, setBusinessCNPJ] = useState('');
+
     async function CreateB() {
         try {
             const token = await AsyncStorage.getItem('Token');
@@ -29,22 +41,32 @@ export default function CreateBusiness() {
 
     return (
         <Background>
-            <Header />
+            <Header>
+                <BackButton onPress={() => navigation.goBack()}>
+                    <BackButtonImg resizeMode="contain" source={BackArrow} />
+                </BackButton>
+            </Header>
             <FeedbackContainer>
                 <BusinessIcon source={ShoppingCart} />
                 <Form>
                     <Input
                         placeholder="nome do seu negócio"
                         placeholderTextColor="#c59e0090"
-                        onChangeText={(text) => handleUsername(text)}
+                        onChangeText={(text) => setBusinessName(text)}
                     />
                     <Input
                         placeholder="cnpj"
                         placeholderTextColor="#c59e0090"
-                        onChangeText={(text) => handleUsername(text)}
+                        onChangeText={(text) => setBusinessCNPJ(text)}
                     />
                 </Form>
-                <ButtonContainer>
+                <ButtonContainer
+                    onPress={() =>
+                        navigation.push('Business', {
+                            businessName,
+                            businessCNPJ,
+                        })
+                    }>
                     <ButtonText>Criar</ButtonText>
                 </ButtonContainer>
             </FeedbackContainer>

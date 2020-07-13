@@ -39,25 +39,17 @@ export default function Menu({navigation}) {
                     </ItemBox>
                 </ItemsCase>
                 <ItemsCase>
-                    <ItemBox>
+                    <ItemBox onPress={() => navigation.push('QRCode')}>
                         <ItemBackground>
                             <ItemImage source={PaymentIcon} />
                         </ItemBackground>
                         <ItemName>Pagamentos</ItemName>
                     </ItemBox>
-                    <ItemBox onPress={() => navigation.push('Business')}>
+                    <ItemBox onPress={() => navigation.push('CreateBusiness')}>
                         <ItemBackground>
                             <ItemImage source={CartIcon} />
                         </ItemBackground>
                         <ItemName>Negócios</ItemName>
-                    </ItemBox>
-                </ItemsCase>
-                <ItemsCase>
-                    <ItemBox onPress={() => navigation.push('Profile')}>
-                        <ItemBackground>
-                            <ItemImage source={CartIcon} />
-                        </ItemBackground>
-                        <ItemName>Perfil</ItemName>
                     </ItemBox>
                 </ItemsCase>
             </ItemsShelf>

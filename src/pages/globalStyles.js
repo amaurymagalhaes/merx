@@ -2,7 +2,8 @@ import styled from 'styled-components/native';
 
 export const Header = styled.View`
     height: 8%;
-    margin-bottom: 5%;
+    margin-top: 3%;
+    margin-bottom: 1%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -85,4 +86,15 @@ export const BackButton = styled.TouchableOpacity`
 
 export const BackButtonImg = styled.Image`
     flex: 1;
+`;
+
+export const IconButton = styled.Image`
+    width: 100%;
+    height: 100%;
+`;
+
+export const IconButtonBorded = styled.Image`
+    width: 100%;
+    height: 100%;
+    border-radius: 1000px;
 `;

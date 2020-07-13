@@ -10,6 +10,7 @@ import Menu from './pages/Menu';
 import Friends from './pages/Friends';
 import Payment from './pages/Payment';
 import Business from './pages/Business';
+import QRCodePage from './pages/QRCode';
 import Profile from './pages/Profile';
 import CreateBusiness from './pages/CreateBusiness';
 
@@ -37,6 +38,7 @@ function Routes() {
                 <Stack.Screen name="Payment" component={Payment} />
                 <Stack.Screen name="Profile" component={Profile} />
                 <Stack.Screen name="Business" component={Business} />
+                <Stack.Screen name="QRCode" component={QRCodePage} />
                 <Stack.Screen
                     name="CreateBusiness"
                     component={CreateBusiness}

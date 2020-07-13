@@ -10,14 +10,21 @@ import {
     ButtonContainer,
     LightYellowButton,
     ButtonText,
-    RedButton,
-    RedButtonText,
 } from './styles';
 
 export default function CardUser({data, isSelected, navigation}) {
     const [isSelectedCard, setSelected] = useState(isSelected);
+    const [isFriend, setIsFriend] = useState(false);
 
-    function addUser() {}
+    function addUser() {
+        if (!isFriend) {
+            setIsFriend(true);
+        } else {
+            setIsFriend(false);
+        }
+    }
+
+    function checkUser() {}
 
     return (
         <Box>
@@ -28,8 +35,14 @@ export default function CardUser({data, isSelected, navigation}) {
                     <TextUsername>@{data.username}</TextUsername>
                 </TextContainer>
                 <ButtonContainer>
-                    <LightYellowButton>
-                        <ButtonText>Adicionar usuário</ButtonText>
+                    <LightYellowButton
+                        onPress={() => addUser()}
+                        isFriend={isFriend}>
+                        <ButtonText isFriend={isFriend}>
+                            {isFriend
+                                ? 'Desfazer amizade'
+                                : 'Adicionar usuário'}
+                        </ButtonText>
                     </LightYellowButton>
                     <LightYellowButton
                         onPress={() => navigation.navigate('Payment', {data})}>

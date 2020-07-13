@@ -17,13 +17,18 @@ import {
     Header,
     LightYellowButton,
     ButtonText,
+    BackButton,
+    BackButtonImg,
 } from '../globalStyles';
+
 import api from '../../services/api';
 
+import BackArrow from '../../images/backarrow.png';
 import ShoppingCart from '../../images/shoppingcart.png';
 
-export default function Business({navigation}) {
-    const [business, setBusiness] = useState('Midas');
+export default function Business({route, navigation}) {
+    const [businessName, setBusinessName] = useState('0000');
+    const [businessCNPJ, setBusinessCNPJ] = useState('1111');
 
     async function checkBusiness() {
         try {
@@ -37,12 +42,31 @@ export default function Business({navigation}) {
         } catch (err) {}
     }
 
-    function renderWithoutBusiness() {
-        return (
+    useEffect(() => {
+        getBusiness();
+    }, []);
+
+    function getBusiness() {
+        if (route.params.businessName && route.params.businessCNPJ) {
+            setBusinessName(route.params.businessName);
+            setBusinessCNPJ(route.params.businessCNPJ);
+        } else {
+            setBusinessName(null);
+            setBusinessCNPJ(null);
+        }
+    }
+
+    return (
+        <Background>
+            <Header>
+                <BackButton onPress={() => navigation.navigate('Menu')}>
+                    <BackButtonImg resizeMode="contain" source={BackArrow} />
+                </BackButton>
+            </Header>
             <FeedbackContainer>
-                <BusinessName>Midas</BusinessName>
+                <BusinessName>{businessName}</BusinessName>
                 <BusinessLogo />
-                <CNPJText>23.213.361/0001-11</CNPJText>
+                <CNPJText>{businessCNPJ}</CNPJText>
                 <LightYellowButton
                     onPress={() => navigation.navigate('CreateBusiness')}>
                     <ButtonText>Pagar</ButtonText>
@@ -60,29 +84,6 @@ export default function Business({navigation}) {
                     <ExcludeText>Excluir negócio</ExcludeText>
                 </RedButton>
             </FeedbackContainer>
-        );
-    }
-
-    function renderWithBusiness() {
-        return (
-            <FeedbackContainer>
-                <BusinessIcon source={ShoppingCart} />
-                <FeedbackText>
-                    Você quer criar seu negócio ou já tem um mas quer pagar
-                    menos taxas? Nós te ajudamos!
-                </FeedbackText>
-                <LightYellowButton
-                    onPress={() => navigation.navigate('CreateBusiness')}>
-                    <ButtonText>Criar seu negócio</ButtonText>
-                </LightYellowButton>
-            </FeedbackContainer>
-        );
-    }
-
-    return (
-        <Background>
-            <Header />
-            {business ? renderWithoutBusiness() : renderWithBusiness()}
         </Background>
     );
 }

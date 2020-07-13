@@ -37,7 +37,37 @@ export const Input = styled.TextInput`
     }
 `;
 
-export const EnterButton = styled.Button`
-    width: 50%;
-    height: 50%;
+export const EnterButton = styled.TouchableOpacity`
+    background-color: #c59e00;
+    width: 150px;
+    height: 40px;
+    align-self: center;
+    margin-bottom: 10px;
+    justify-content: center;
+    border-radius: 25px;
+`;
+
+export const RegisterButton = styled.TouchableOpacity`
+    height: 40px;
+    align-self: center;
+    margin-top: 20px;
+    justify-content: center;
+`;
+
+export const TextButton = styled.Text`
+    color: white;
+    font-size: 20px;
+    text-align: center;
+`;
+
+export const RegisterText = styled.Text`
+    color: #c59e00;
+    font-size: 21px;
+    text-align: center;
+`;
+
+export const RegisterText2 = styled.Text`
+    color: white;
+    font-size: 21px;
+    text-align: center;
 `;

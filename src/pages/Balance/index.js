@@ -11,7 +11,11 @@ import {
     DateText,
     TransactionShelf,
 } from './styles';
-import {Header} from '../globalStyles';
+import {Header, IconButton, IconButtonBorded} from '../globalStyles';
+
+import MenuIcon from '../../images/menu.png';
+import NotificationIcon from '../../images/notification.png';
+import ProfileIcon from '../../images/perfilphoto.jpg';
 
 import api from '../../services/api';
 import Transactions from '../../components/Transactions';
@@ -69,11 +73,25 @@ export default function Balance({navigation}) {
     return (
         <Background>
             <Header>
-                <MenuButton onPress={() => navigation.navigate('Menu')} />
+                <MenuButton onPress={() => navigation.navigate('Menu')}>
+                    <IconButton resizeMode="contain" source={MenuIcon} />
+                </MenuButton>
+                <MenuButton>
+                    <IconButton
+                        resizeMode="contain"
+                        source={NotificationIcon}
+                    />
+                </MenuButton>
+                <MenuButton onPress={() => navigation.navigate('Profile')}>
+                    <IconButtonBorded
+                        resizeMode="contain"
+                        source={ProfileIcon}
+                    />
+                </MenuButton>
             </Header>
             <BalanceContainer>
                 <BalanceText>Saldo</BalanceText>
-                <BalanceMoneyText>R$ {balance}</BalanceMoneyText>
+                <BalanceMoneyText>R$ {balance},00</BalanceMoneyText>
             </BalanceContainer>
             <TransactionsContainer>
                 <TransactionShelf>

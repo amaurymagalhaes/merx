@@ -39,7 +39,6 @@ export const TransactionTextTime = styled.Text`
 `;
 
 export const MoneyText = styled.Text`
-    width: 30%;
-    font-size: 22px;
+    font-size: 21px;
     color: ${(props) => (props.direction === 'in' ? '#25C200' : '#C20000')};
 `;

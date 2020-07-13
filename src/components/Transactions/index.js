@@ -66,7 +66,7 @@ export default function Transactions({data}) {
                 <TransactionTextTime>Há {dateParsed}</TransactionTextTime>
             </TransactionTextContainer>
             <MoneyText direction={direction}>
-                {direction === 'in' ? '+' : '-'} R$ {data.amount}
+                {direction === 'in' ? '+' : '-'} R$ {data.amount},00
             </MoneyText>
         </TransactionBox>
     );

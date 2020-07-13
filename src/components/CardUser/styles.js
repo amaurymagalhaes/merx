@@ -46,7 +46,7 @@ export const ButtonContainer = styled.View`
 `;
 
 export const LightYellowButton = styled.TouchableOpacity`
-    background-color: #f2ca50;
+    background-color: ${(props) => (props.isFriend ? '#0d0d0d' : '#f2ca50')};
     border-radius: 50px;
     height: 50px;
     padding-left: 20px;
@@ -55,10 +55,11 @@ export const LightYellowButton = styled.TouchableOpacity`
     margin-top: 1%;
     align-items: center;
     justify-content: center;
+    border: 3px solid #f2ca50;
 `;
 
 export const ButtonText = styled.Text`
-    color: #0d0d0d;
+    color: ${(props) => (props.isFriend ? '#f2ca50' : '#0d0d0d')};
     font-size: 23px;
     text-align: center;
 `;
